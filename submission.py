@@ -1,9 +1,11 @@
 #libaries/frameworks
+from fileinput import filename
 from tkinter import *
 import tkinter as tk
 from tkinter import filedialog
 from PIL import Image
 from PIL import ImageFilter
+from soupsieve import select
 
 from imageEditor import selectionImage
 
@@ -70,30 +72,28 @@ def editSelection(args):
 #     backButton.pack(pady=30)
 
 #shows original image followed by the edit (blur)
-def imageSelection():
-    imagePath = filedialog.askopenfilename(filetypes=[("Image File",'.jpg')])
-    img=Image.open(imagePath)
-    img=tk.PhotoImage(img)
-
-button = tk.Button(root, text = "Click button to open image", command=imageSelection)
-button.pack(ipadx=5, pady=15)
 
     #nextMenu()
 def blur():
-    global selectedImage
-    selectedImage = filedialog.askopenfile(filetypes=[("Image File",'.jpg')])
-    if selectedImage == "beach.jpg":
-        selectedImage.filter(ImageFilter.BLUR)
-        selectedImage.show()
-        selectedImage.save("images/beachBlur.jpg")
-    if selectedImage == "cat.jpg":
-        selectedImage.filter(ImageFilter.BLUR)
-        selectedImage.show()
-        selectedImage.save("images/catBlur.jpg")
-    if selectedImage == "dog.jpg":
-        selectedImage.filter(ImageFilter.BLUR)
-        selectedImage.show()
-        selectedImage.save("images/dogBlur.jpg")
+    try:
+        filename = filedialog.askopenfile(filetypes=[("Image File",'.jpg')])
+        selectedImage = 
+        # selectedImage = Image.open(imagePath)
+        # selectedImage =tk.PhotoImage(selectedImage)
+        if selectedImage == "images/beach.jpg":
+            selectedImage.filter(ImageFilter.BLUR)
+            selectedImage.show()
+            selectedImage.save("images/beachBlur.jpg")
+        if selectedImage == "images/cat.jpg":
+            selectedImage.filter(ImageFilter.BLUR)
+            selectedImage.show()
+            selectedImage.save("images/catBlur.jpg")
+        if selectedImage == "images/dog.jpg":
+            selectedImage.filter(ImageFilter.BLUR)
+            selectedImage.show()
+            selectedImage.save("images/dogBlur.jpg")
+    except IOError:
+        pass
     #_____.filter(ImageFilter.BLUR)
     #_____.show()
     #_____.save("_____.jpg")
